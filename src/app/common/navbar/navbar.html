@@ -1,0 +1,71 @@
+<div class="dashboard-container">
+  <!-- Top Navbar -->
+  <header class="topbar">
+    <!-- Logo Left -->
+    <div class="logo">
+      <img src="logo.png" alt="My Website" />
+    </div>
+
+    <!-- Desktop/Mobile Nav -->
+    <nav class="nav-links" [ngClass]="{ active: menuOpen }">
+      <a
+        class="nav-link"
+        routerLink="/app/dashboard"
+        routerLinkActive="active"
+        (click)="closeMenu()"
+        >Dashboard</a
+      >
+      <a
+        class="nav-link"
+        routerLink="/app/products"
+        routerLinkActive="active"
+        (click)="closeMenu()"
+        >Products</a
+      >
+      <a
+        class="nav-link"
+        routerLink="/app/cart"
+        routerLinkActive="active"
+        (click)="closeMenu()"
+        >Cart</a
+      >
+      <a
+        class="nav-link"
+        routerLink="/app/orders"
+        routerLinkActive="active"
+        (click)="closeMenu()"
+        >Orders</a
+      >
+      <a
+        class="nav-link"
+        routerLink="/app/profile"
+        routerLinkActive="active"
+        (click)="closeMenu()"
+        >Profile</a
+      >
+      <a
+        class="nav-link"
+        routerLink="/app/ai-assistant"
+        routerLinkActive="active"
+        (click)="closeMenu()"
+      >
+        AI Assistance
+      </a>
+    </nav>
+
+    <!-- Hamburger icon (mobile only) -->
+    <div class="menu-toggle" (click)="toggleMenu()">☰</div>
+
+    <!-- Logout button Right -->
+    <!-- Logout button Right -->
+    <button class="logout-btn" (click)="logout()">
+      <mat-icon class="logout-icon">logout</mat-icon>
+      <span class="logout-text">Logout</span>
+    </button>
+  </header>
+
+  <!-- Main Content -->
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

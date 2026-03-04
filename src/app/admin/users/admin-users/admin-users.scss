@@ -1,0 +1,164 @@
+.admin-page {
+  padding: 16px;
+  background: #ffffff;
+
+  .page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 20px;
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 0;
+      color: #111827;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: #facc15;
+        border-radius: 2px;
+      }
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+
+      button {
+        border-radius: 8px;
+        text-transform: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      button.mat-flat-button {
+        background: #facc15;
+        color: #111827;
+
+        &:hover {
+          background: #eab308;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(250, 204, 21, 0.4);
+        }
+      }
+
+      .search {
+        width: 250px;
+
+        input {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .loader {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+
+    mat-progress-spinner {
+      circle {
+        stroke: #facc15 !important;
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #f4f4f4;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+    border-collapse: separate;
+
+    th {
+      background: #fef9c3;
+      font-weight: 600;
+      color: #1f2937;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    td,
+    th {
+      padding: 12px;
+      text-align: left;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    tr {
+      transition: background 0.3s ease;
+
+      &:hover {
+        background-color: rgba(250, 204, 21, 0.1);
+      }
+    }
+
+    button.mat-icon-button {
+      transition: transform 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        transform: scale(1.15);
+        color: #facc15;
+      }
+    }
+
+    /* ✅ Column Hover Highlight */
+    td:hover::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 9999px; // poore column ko cover karega
+      background-color: rgba(250, 204, 21, 0.15);
+      z-index: -1;
+    }
+
+    td:hover,
+    th:hover {
+      background-color: rgba(250, 204, 21, 0.25);
+    }
+  }
+
+  mat-paginator {
+    margin-top: 16px;
+    border-top: 1px solid #eee;
+    padding-top: 8px;
+    background: #fff;
+    border-radius: 6px;
+  }
+
+  /* ✅ Scroll sirf mobile pe enable hoga */
+  @media (max-width: 768px) {
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+      font-size: 0.85rem;
+
+      th,
+      td {
+        padding: 8px;
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+<!-- pages/cart/cart.html -->
+<div class="cart-container">
+  <h2 class="cart-title">My Shopping Cart</h2>
+
+  <!-- Loader -->
+  <div *ngIf="loading" class="loader">Loading cart...</div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading && cartProducts.length === 0" class="empty">
+    Your cart is empty.
+  </div>
+
+  <!-- Cart Items -->
+  <div *ngIf="!loading && cartProducts.length > 0" class="cart-items">
+    <app-cart-product
+      *ngFor="let item of cartProducts"
+      [cartProduct]="item"
+      (updateCartEvent)="onCartUpdated()"
+    ></app-cart-product>
+  </div>
+
+  <!-- Total -->
+  <div *ngIf="cartProducts.length > 0" class="cart-summary">
+    <h3>Total: {{ total | currency }}</h3>
+    <button class="checkout-btn" routerLink="/app/checkout">
+      Proceed to Checkout
+    </button>
+  </div>
+</div>

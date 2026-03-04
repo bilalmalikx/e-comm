@@ -1,0 +1,123 @@
+.notification-modal {
+  text-align: center;
+  padding: 24px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+  max-width: 420px;
+  width: 90%;
+  margin: auto;
+  animation: fadeIn 0.35s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  @media (max-width: 480px) {
+    padding: 18px;
+    max-width: 95%;
+  }
+
+  .icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .icon-circle {
+      border-radius: 50%;
+      width: 85px;
+      height: 85px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+      &.success {
+        background: #dcfce7;
+      }
+      &.error {
+        background: #fee2e2;
+      }
+      &.info {
+        background: #e0f2fe;
+      }
+      .icon {
+        font-size: 52px;
+        &.success {
+          color: #22c55e;
+        }
+        &.error {
+          color: #ef4444;
+        }
+        &.info {
+          color: #0ea5e9;
+        }
+      }
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-top: 10px;
+    color: #1e293b;
+    @media (max-width: 480px) {
+      font-size: 1.5rem;
+    }
+  }
+  .message {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #475569;
+    line-height: 1.5;
+    padding: 0 10px;
+    @media (max-width: 480px) {
+      font-size: 0.95rem;
+    }
+  }
+
+  .button-wrapper {
+    margin-top: 20px;
+    button[mat-raised-button] {
+      padding: 10px 30px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      box-shadow: 0 6px 15px rgba(59, 130, 246, 0.4);
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.5);
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Make sure dialog is above all modals */
+::ng-deep .notification-dialog .mat-dialog-container {
+  z-index: 2000 !important;
+}
+::ng-deep .notification-dialog {
+  z-index: 2000 !important; // upar dikhne ke liye modal se bhi zyada
+}
+::ng-deep .cdk-overlay-container {
+  z-index: 9999 !important;
+}
+::ng-deep .cdk-overlay-pane {
+  z-index: 9999 !important;
+}

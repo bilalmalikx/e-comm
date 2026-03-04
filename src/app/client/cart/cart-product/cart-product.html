@@ -1,0 +1,21 @@
+<!-- pages/cart/cart-product/cart-product.html -->
+<div class="cart-product">
+  <img
+    [src]="cartProduct.imageUrl || 'assets/no-image.png'"
+    alt="{{ cartProduct.name }}"
+    class="product-img"
+  />
+
+  <div class="product-info">
+    <h4>{{ cartProduct.name }}</h4>
+    <p class="price">{{ cartProduct.price | currency }}</p>
+
+    <div class="quantity-controls">
+      <button (click)="updateQuantity(-1)">-</button>
+      <span>{{ cartProduct.qty }}</span>
+      <button (click)="updateQuantity(1)">+</button>
+    </div>
+
+    <button class="remove-btn" (click)="removeProduct()">Remove</button>
+  </div>
+</div>

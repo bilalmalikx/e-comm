@@ -1,0 +1,124 @@
+<!-- STATS -->
+<div class="stats-grid" [@fadeInUp]>
+  <ng-container *ngIf="!loadingStats; else statsSkeleton">
+    <mat-card class="stat-card bg-users">
+      <div class="icon"><mat-icon>group</mat-icon></div>
+      <div class="meta">
+        <span class="label">Users</span>
+        <h3 class="value">{{ userCount || 0 }}</h3>
+      </div>
+      <a routerLink="/admin/users" mat-button color="primary">Manage</a>
+    </mat-card>
+
+    <mat-card class="stat-card bg-products">
+      <div class="icon"><mat-icon>inventory_2</mat-icon></div>
+      <div class="meta">
+        <span class="label">Products</span>
+        <h3 class="value">{{ productCount || 0 }}</h3>
+      </div>
+      <a routerLink="/admin/products" mat-button color="primary">Manage</a>
+    </mat-card>
+
+    <mat-card class="stat-card bg-orders">
+      <div class="icon"><mat-icon>shopping_cart</mat-icon></div>
+      <div class="meta">
+        <span class="label">Orders</span>
+        <h3 class="value">{{ orderCount || 0 }}</h3>
+      </div>
+      <a routerLink="/admin/orders" mat-button color="primary">Manage</a>
+    </mat-card>
+  </ng-container>
+
+  <ng-template #statsSkeleton>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+    <div class="skeleton-card"></div>
+  </ng-template>
+</div>
+
+<!-- SALES ANALYSIS -->
+<mat-card class="chart-card" [@fadeInUp]>
+  <div class="header">
+    <h4>Sales Analysis</h4>
+  </div>
+  <div class="body">
+    <canvas
+      baseChart
+      [data]="salesChartData"
+      [options]="salesChartOptions"
+      chartType="line"
+    >
+    </canvas>
+  </div>
+</mat-card>
+
+<!-- RECENT ROWS -->
+<div class="rows">
+  <!-- Recent Orders -->
+  <mat-card class="list-card" [@fadeInUp]>
+    <div class="header">
+      <h4>Recent Orders</h4>
+      <a routerLink="/admin/orders" mat-button>View all</a>
+    </div>
+    <div class="body">
+      <ng-container *ngIf="!loadingLists; else listSkeleton">
+        <div *ngFor="let o of recentOrders" class="row" [@listStagger]>
+          <span class="muted">#{{ o.id }}</span>
+          <span class="grow">{{ o.customerName || o.user?.name }}</span>
+          <span class="badge" [ngClass]="o.status">{{ o.status }}</span>
+          <span class="amount">{{ o.total | currency : "PKR" }}</span>
+        </div>
+        <div *ngIf="recentOrders.length === 0" class="empty">
+          No orders yet.
+        </div>
+      </ng-container>
+    </div>
+  </mat-card>
+
+  <!-- New Users -->
+  <mat-card class="list-card" [@fadeInUp]>
+    <div class="header">
+      <h4>New Users</h4>
+      <a routerLink="/admin/users" mat-button>View all</a>
+    </div>
+    <div class="body">
+      <ng-container *ngIf="!loadingLists; else listSkeleton">
+        <div *ngFor="let u of recentUsers" class="row" [@listStagger]>
+          <span class="avatar">{{
+            u.name || u.email || "U" | slice : 0 : 1
+          }}</span>
+          <span class="grow">{{ u.name || u.email }}</span>
+          <span class="muted">{{ u.role || "user" }}</span>
+        </div>
+        <div *ngIf="recentUsers.length === 0" class="empty">No users yet.</div>
+      </ng-container>
+    </div>
+  </mat-card>
+
+  <!-- Recent Products -->
+  <mat-card class="list-card" [@fadeInUp]>
+    <div class="header">
+      <h4>Recent Products</h4>
+      <a routerLink="/admin/products" mat-button>View all</a>
+    </div>
+    <div class="body">
+      <ng-container *ngIf="!loadingLists; else listSkeleton">
+        <div *ngFor="let p of recentProducts" class="row" [@listStagger]>
+          <span class="chip">{{ p.sku || "#" + p.id }}</span>
+          <span class="grow">{{ p.name }}</span>
+          <span class="muted">{{ p.stock ?? "—" }} in stock</span>
+        </div>
+        <div *ngIf="recentProducts.length === 0" class="empty">
+          No products yet.
+        </div>
+      </ng-container>
+    </div>
+  </mat-card>
+</div>
+
+<!-- Skeletons -->
+<ng-template #listSkeleton>
+  <div class="skeleton-row"></div>
+  <div class="skeleton-row"></div>
+  <div class="skeleton-row"></div>
+</ng-template>

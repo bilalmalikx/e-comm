@@ -1,0 +1,54 @@
+<div class="home-container">
+  <!-- HERO / FAKE VIDEO BANNER -->
+  <section class="video-banner">
+    <div class="overlay"></div>
+    <div class="banner-content">
+      <h1>Experience the Future of Shopping</h1>
+      <p>Here is the best shop you can find out anything form here!</p>
+      <button class="btn-view" (click)="scrollToProducts()">Explore Now</button>
+    </div>
+  </section>
+
+  <!-- OFFERS CAROUSEL -->
+  <section class="carousel-section" *ngIf="offers.length > 0">
+    <div class="carousel">
+      <div
+        class="carousel-inner"
+        [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
+      >
+        <div class="carousel-item" *ngFor="let offer of offers">
+          <img
+            [src]="offer.image_url || 'assets/no-image.png'"
+            alt="{{ offer.name }}"
+          />
+          <h3>{{ offer.name }}</h3>
+          <p>{{ offer.price }} {{ offer.currency }}</p>
+        </div>
+      </div>
+      <button class="carousel-btn prev" (click)="prevSlide()">&#10094;</button>
+      <button class="carousel-btn next" (click)="nextSlide()">&#10095;</button>
+    </div>
+  </section>
+
+  <!-- PRODUCTS SECTION -->
+  <section class="products" #productsSection>
+    <h2 class="section-title">Pick Your Favorite Product</h2>
+
+    <!-- Filter Input -->
+    <div class="filter-box">
+      <input
+        type="text"
+        placeholder="Search products..."
+        [(ngModel)]="filterText"
+      />
+    </div>
+
+    <!-- Product Grid -->
+    <div class="products-grid">
+      <app-home-product
+        *ngFor="let p of filteredProducts"
+        [product]="p"
+      ></app-home-product>
+    </div>
+  </section>
+</div>

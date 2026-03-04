@@ -1,0 +1,32 @@
+<div class="checkout-container">
+  <h2 class="checkout-title">Checkout</h2>
+
+  <!-- Loader -->
+  <div *ngIf="loader.loading$ | async" class="loader">Processing...</div>
+
+  <!-- Cart Items -->
+  <ul class="cart-items" *ngIf="cartItems.length > 0">
+    <li class="cart-item" *ngFor="let item of cartItems">
+      <img
+        [src]="item.imageUrl || 'assets/no-image.png'"
+        alt="{{ item.name }}"
+        class="item-img"
+      />
+      <div class="item-info">
+        <h4>{{ item.name }}</h4>
+        <p>{{ item.qty }} x {{ item.price | currency }}</p>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Empty Cart -->
+  <div *ngIf="cartItems.length === 0" class="empty-cart">
+    Your cart is empty.
+  </div>
+
+  <!-- Total & Pay Button -->
+  <div *ngIf="cartItems.length > 0" class="checkout-summary">
+    <p class="total">Total: {{ total | currency }}</p>
+    <button class="btn-pay" (click)="pay()">Pay Now</button>
+  </div>
+</div>

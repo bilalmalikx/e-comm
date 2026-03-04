@@ -1,0 +1,84 @@
+<div class="profile-container">
+  <h2 class="profile-title">My Profile</h2>
+
+  <!-- Loader -->
+  <div *ngIf="loader.loading$ | async" class="loader-overlay">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Profile Card -->
+  <div class="profile-card">
+    <form (ngSubmit)="updateProfile()" class="animated-form">
+      <!-- Name -->
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          id="name"
+          class="form-control"
+          [(ngModel)]="formData.name"
+          name="name"
+          required
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" class="form-control" [value]="user.email" disabled />
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input
+          id="phone"
+          class="form-control"
+          [(ngModel)]="formData.phone"
+          name="phone"
+        />
+      </div>
+
+      <!-- DOB -->
+      <div class="form-group">
+        <label for="dob">Date of Birth</label>
+        <input
+          id="dob"
+          class="form-control"
+          type="date"
+          [(ngModel)]="formData.dob"
+          name="dob"
+        />
+      </div>
+
+      <!-- Address -->
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input
+          id="address"
+          class="form-control"
+          [(ngModel)]="formData.address"
+          name="address"
+        />
+      </div>
+
+      <!-- Gender -->
+      <div class="form-group custom-dropdown" (click)="toggleDropdown()">
+        <label>Gender</label>
+        <div class="dropdown-selected">
+          {{ formData.gender || "Select Gender" }}
+          <span class="arrow"></span>
+        </div>
+        <ul class="dropdown-options" [class.show]="dropdownOpen">
+          <li (click)="selectGender('male')">Male</li>
+          <li (click)="selectGender('female')">Female</li>
+          <li (click)="selectGender('other')">Other</li>
+        </ul>
+      </div>
+
+      <!-- Button -->
+      <button type="submit" class="btn-update">
+        <span>Update Profile</span>
+      </button>
+    </form>
+  </div>
+</div>

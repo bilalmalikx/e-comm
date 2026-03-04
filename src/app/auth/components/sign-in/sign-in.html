@@ -1,0 +1,108 @@
+<div class="signup-modal" *ngIf="isOpen">
+  <div class="signup-box animate-popup">
+    <!-- Close Button -->
+    <button mat-icon-button class="close-btn" (click)="closeModal()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <!-- Title -->
+    <h2 class="signup-title">Create Account</h2>
+
+    <!-- Form -->
+    <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+      <div class="grid-container">
+        <!-- Name -->
+        <div class="form-group">
+          <mat-icon>person</mat-icon>
+          <input formControlName="name" type="text" placeholder="Full Name" />
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <mat-icon>email</mat-icon>
+          <input formControlName="email" type="email" placeholder="Email" />
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+          <mat-icon>phone</mat-icon>
+          <input formControlName="phone" type="text" placeholder="Phone" />
+        </div>
+
+        <!-- DOB -->
+        <div class="form-group">
+          <mat-icon>calendar_today</mat-icon>
+          <input formControlName="dob" type="date" />
+        </div>
+
+        <!-- Address -->
+        <div class="form-group full-width">
+          <mat-icon>home</mat-icon>
+          <input formControlName="address" type="text" placeholder="Address" />
+        </div>
+
+        <!-- Gender -->
+        <div class="form-group">
+          <mat-icon>wc</mat-icon>
+          <select formControlName="gender">
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group password-group">
+          <mat-icon>lock</mat-icon>
+          <input
+            formControlName="password"
+            [type]="showPassword ? 'text' : 'password'"
+            placeholder="Password"
+          />
+          <button
+            type="button"
+            mat-icon-button
+            class="toggle-btn"
+            (click)="togglePassword()"
+          >
+            <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group password-group">
+          <mat-icon>lock_reset</mat-icon>
+          <input
+            formControlName="confirmPassword"
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            placeholder="Confirm Password"
+          />
+          <button
+            type="button"
+            mat-icon-button
+            class="toggle-btn"
+            (click)="toggleConfirmPassword()"
+          >
+            <mat-icon>{{ showConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- Password Error -->
+      <small class="error" *ngIf="signupForm.getError('notMatching')">
+        Passwords do not match.
+      </small>
+
+      <!-- Submit Button -->
+      <button
+        mat-raised-button
+        color="primary"
+        class="signup-btn"
+        type="submit"
+        style="background-color: #1e40af"
+      >
+        <mat-icon>person_add</mat-icon> Sign Up
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="chat-container">
+  <!-- Header -->
+  <div class="chat-header">💬 Chat Assistant</div>
+
+  <!-- Messages -->
+  <div class="chat-messages">
+    <div
+      *ngFor="let msg of messages"
+      [ngClass]="{
+        'user-msg': msg.sender === 'user',
+        'bot-msg': msg.sender === 'bot'
+      }"
+      class="chat-message"
+    >
+      <!-- Loader dots -->
+      <ng-container *ngIf="msg.text === 'Thinking...'; else normalText">
+        <div class="typing-loader"><span></span><span></span><span></span></div>
+      </ng-container>
+      <ng-template #normalText>{{ msg.text }}</ng-template>
+    </div>
+  </div>
+
+  <!-- Input -->
+  <div class="chat-input">
+    <input
+      type="text"
+      placeholder="Type your message..."
+      [(ngModel)]="newMessage"
+      (keyup.enter)="sendMessage()"
+    />
+    <button (click)="sendMessage()">Send</button>
+  </div>
+</div>

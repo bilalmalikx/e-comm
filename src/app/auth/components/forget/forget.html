@@ -1,0 +1,112 @@
+<div class="modal-container" *ngIf="isOpen">
+  <div class="modal-box">
+    <!-- Header -->
+    <div class="modal-header">
+      <h2 class="modal-title">
+        {{
+          step === 1
+            ? "Forgot Password"
+            : step === 2
+            ? "Verify Code"
+            : "Set New Password"
+        }}
+      </h2>
+      <button class="close-btn" (click)="closeModal()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="modal-body">
+      <!-- STEP 1 — ENTER EMAIL -->
+      <form
+        *ngIf="step === 1"
+        [formGroup]="forgotForm"
+        (ngSubmit)="sendResetLink()"
+      >
+        <p class="modal-text">Enter your registered email</p>
+        <div class="input-group">
+          <mat-icon class="icon">mail</mat-icon>
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="Enter your email"
+            class="form-control"
+          />
+        </div>
+        <button
+          class="submit-btn"
+          type="submit"
+          [disabled]="forgotForm.invalid"
+        >
+          Send Verification Code
+        </button>
+      </form>
+
+      <!-- STEP 2 — VERIFY OTP -->
+      <form *ngIf="step === 2" [formGroup]="otpForm" (ngSubmit)="verifyCode()">
+        <p class="modal-text">Enter the OTP sent to your email</p>
+        <div class="otp-container">
+          <input
+            maxlength="1"
+            *ngFor="let item of otpArray; let i = index"
+            class="otp-input"
+            [formControlName]="'otp' + i"
+            (keyup)="moveToNext($event, i)"
+          />
+        </div>
+        <small class="error" *ngIf="otpInvalid"
+          >Invalid OTP. Please try again.</small
+        >
+        <button class="submit-btn" type="submit">Verify Code</button>
+        <p class="resend" (click)="resendOtp()">Resend Code</p>
+      </form>
+
+      <!-- STEP 3 — SET NEW PASSWORD -->
+      <!-- STEP 3 — SET NEW PASSWORD -->
+      <form
+        *ngIf="step === 3"
+        [formGroup]="resetForm"
+        (ngSubmit)="updatePassword()"
+      >
+        <p class="modal-text">Enter your new password</p>
+
+        <!-- New Password -->
+        <div class="input-group">
+          <mat-icon class="icon">lock</mat-icon>
+          <input
+            [type]="showNewPassword ? 'text' : 'password'"
+            formControlName="newPassword"
+            placeholder="New password"
+            class="form-control"
+          />
+          <span class="toggle-icon" (click)="toggleNewPassword()">
+            <mat-icon>{{
+              showNewPassword ? "visibility_off" : "visibility"
+            }}</mat-icon>
+          </span>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="input-group">
+          <mat-icon class="icon">check_circle</mat-icon>
+          <input
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            formControlName="confirmPassword"
+            placeholder="Confirm password"
+            class="form-control"
+          />
+          <span class="toggle-icon" (click)="toggleConfirmPassword()">
+            <mat-icon>{{
+              showConfirmPassword ? "visibility_off" : "visibility"
+            }}</mat-icon>
+          </span>
+        </div>
+
+        <button class="submit-btn" type="submit" [disabled]="resetForm.invalid">
+          Update Password
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

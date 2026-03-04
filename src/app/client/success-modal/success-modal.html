@@ -1,0 +1,29 @@
+<div class="notification-modal">
+  <!-- Icon -->
+  <div class="icon-wrapper">
+    <div class="icon-circle" [ngClass]="data.type">
+      <mat-icon class="icon" [ngClass]="data.type">
+        {{
+          data.type === "success"
+            ? "check_circle"
+            : data.type === "error"
+            ? "error"
+            : "info"
+        }}
+      </mat-icon>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <h2 class="title">{{ data.title }}</h2>
+
+  <!-- Message -->
+  <p class="message">{{ data.message }}</p>
+
+  <!-- Action Button -->
+  <div class="button-wrapper">
+    <button mat-raised-button color="primary" (click)="dialogRef.close()">
+      OK
+    </button>
+  </div>
+</div>

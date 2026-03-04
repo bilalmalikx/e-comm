@@ -1,0 +1,285 @@
+.profile-container {
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 20px;
+  position: relative;
+  animation: fadeIn 0.8s ease-in-out;
+
+  /* Animated background */
+  background: linear-gradient(135deg, #fff8e1, #fff3cd, #fff9c4);
+  background-size: 400% 400%;
+  animation: bgAnimation 10s ease infinite;
+  border-radius: 18px;
+
+  .profile-title {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    font-weight: 700;
+    color: #444;
+    position: relative;
+    animation: slideDown 0.7s ease;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #ffc107, #ff9800);
+      margin: 10px auto 0;
+      border-radius: 2px;
+      animation: growBar 1s ease;
+    }
+  }
+
+  .profile-card {
+    background: #fffdf3;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(255, 193, 7, 0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: visible;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(255, 193, 7, 0.25);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      animation: slideUp 0.8s ease;
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+
+        label {
+          font-weight: 600;
+          margin-bottom: 6px;
+          color: #555;
+        }
+
+        input {
+          padding: 12px 16px;
+          border-radius: 10px;
+          border: 1px solid #ddd;
+          font-size: 1rem;
+          transition: all 0.3s ease;
+          background: #fffdf7;
+
+          &:focus {
+            border-color: #ffc107;
+            box-shadow: 0 0 6px rgba(255, 193, 7, 0.4);
+            transform: scale(1.02);
+          }
+
+          &:disabled {
+            background-color: #f9f9f9;
+            color: #777;
+          }
+        }
+      }
+
+      /* Custom Dropdown */
+      .custom-dropdown {
+        position: relative;
+        cursor: pointer;
+
+        .dropdown-selected {
+          padding: 12px 16px;
+          border: 1px solid #ddd;
+          border-radius: 10px;
+          background: #fffdf7;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 1rem;
+
+          &:hover {
+            border-color: #ffc107;
+            box-shadow: 0 0 6px rgba(255, 193, 7, 0.3);
+          }
+
+          .arrow {
+            border: solid #666;
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 5px;
+            transform: rotate(45deg);
+          }
+        }
+
+        .dropdown-options {
+          position: absolute;
+          top: 110%;
+          left: 0;
+          width: 100%;
+          background: #fff;
+          border: 1px solid #ddd;
+          border-radius: 10px;
+          list-style: none;
+          padding: 0;
+          margin: 5px 0 0;
+          max-height: 0;
+          overflow: hidden;
+          transition: all 0.4s ease;
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+          z-index: 1000;
+
+          li {
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+
+            &:hover {
+              background: #ffc107;
+              color: #fff;
+            }
+          }
+
+          &.show {
+            max-height: 200px;
+          }
+        }
+      }
+
+      /* Button */
+      .btn-update {
+        position: relative;
+        padding: 14px 22px;
+        background: linear-gradient(90deg, #ffc107, #ff9800);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        cursor: pointer;
+        overflow: hidden;
+        transition: transform 0.3s;
+
+        span {
+          position: relative;
+          z-index: 2;
+        }
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 18px rgba(255, 193, 7, 0.3);
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: rgba(255, 255, 255, 0.3);
+          transition: left 0.4s;
+        }
+
+        &:hover::before {
+          left: 100%;
+        }
+      }
+    }
+  }
+
+  /* Loader */
+  .loader-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    z-index: 20;
+
+    .spinner {
+      width: 55px;
+      height: 55px;
+      border: 6px solid #eee;
+      border-top: 6px solid #ffc107;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes slideDown {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes growBar {
+  from {
+    width: 0;
+  }
+  to {
+    width: 60px;
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* Background Animation */
+@keyframes bgAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 15px;
+
+    .profile-card {
+      padding: 20px;
+    }
+  }
+}

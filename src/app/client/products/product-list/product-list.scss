@@ -1,0 +1,35 @@
+.product-list-container {
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center; // sab kuch center align ho
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.loader {
+  text-align: center;
+  font-size: 1.2rem;
+  width: 100%;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); // ✅ auto-fit for center alignment
+  gap: 1.5rem;
+  justify-items: center; // ✅ har product card ko horizontally center karega
+  width: 100%;
+  max-width: 1200px; // ✅ center content fix width
+}
+
+.empty {
+  text-align: center;
+  font-size: 1rem;
+  color: gray;
+  margin-top: 1rem;
+}

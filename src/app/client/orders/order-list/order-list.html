@@ -1,0 +1,30 @@
+<div class="order-list-container">
+  <h2>My Orders</h2>
+
+  <div *ngIf="loader.loading$ | async" class="loader">Loading...</div>
+
+  <div *ngIf="!(loader.loading$ | async)">
+    <div *ngIf="orders.length === 0">No orders found.</div>
+
+    <table *ngIf="orders.length > 0" class="orders-table">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Status</th>
+          <th>Total</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{ order.id }}</td>
+          <td>{{ order.status }}</td>
+          <td>{{ order.total | currency : order.currency }}</td>
+          <td>{{ order.created_at | date : "short" }}</td>
+          <td><a [routerLink]="['/app/orders', order.id]">View</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

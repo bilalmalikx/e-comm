@@ -1,0 +1,35 @@
+<div class="order-detail-container">
+  <h2>Order Detail</h2>
+
+  <div *ngIf="loader.loading$ | async" class="loader">Loading...</div>
+
+  <div *ngIf="!(loader.loading$ | async)">
+    <div *ngIf="order.id; else notFound">
+      <p><strong>Order ID:</strong> {{ order.id }}</p>
+      <p><strong>Status:</strong> {{ order.status }}</p>
+      <p>
+        <strong>Subtotal:</strong>
+        {{ order.subtotal | currency : order.currency }}
+      </p>
+      <p>
+        <strong>Shipping:</strong>
+        {{ order.shipping | currency : order.currency }}
+      </p>
+      <p>
+        <strong>Total:</strong> {{ order.total | currency : order.currency }}
+      </p>
+
+      <h4>Items:</h4>
+      <ul>
+        <li *ngFor="let item of items">
+          {{ item.name }} x {{ item.qty }} -
+          {{ item.price | currency : order.currency }}
+        </li>
+      </ul>
+    </div>
+
+    <ng-template #notFound>
+      <p>Order not found.</p>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="product-list-container">
+  <h2 class="section-title">Available Products</h2>
+
+  <!-- Loader -->
+  <div *ngIf="loading" class="loader">Loading products...</div>
+
+  <!-- Products -->
+  <div class="products-grid" *ngIf="!loading && products.length > 0">
+    <app-home-product *ngFor="let p of products" [product]="p">
+    </app-home-product>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading && products.length === 0" class="empty">
+    No products available.
+  </div>
+</div>
