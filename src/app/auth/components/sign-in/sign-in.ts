@@ -89,7 +89,7 @@ export class SignIn {
       next: () => {
         this.loader.hide();
         this.activeModal.close();
-        this.toast.success('Account Created!', 'You can now log in 👋', 3000);
+        this.toast.success('Account Created!', 'Please check your mail box we sent email verification after that you can now log in 👋', 3000);
       },
       error: (err) => {
         this.loader.hide();
