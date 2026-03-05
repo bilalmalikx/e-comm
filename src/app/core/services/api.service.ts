@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-  private readonly baseUrl = 'http://localhost:8000';
+  private readonly baseUrl = 'https://backend-ftry.onrender.com';
 
   constructor(private http: HttpClient) {}
 
